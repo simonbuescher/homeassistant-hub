@@ -1,0 +1,31 @@
+version: "3.9"
+
+services:
+  mosquitto:
+    image: eclipse-mosquitto
+    volumes:
+      - ./mosquitto/config:/mosquitto/config/
+      - ./mosquitto/data:/mosquitto/data
+      - ./mosquitto/log:/mosquitto/log
+    ports:
+      - "1883:1883"
+      - "9001:9001"
+  mqtt-exporter:
+    image: fhemberger/mqtt_exporter
+    volumes:
+      - ./mqtt-exporter/config.yaml:/usr/src/app/conf
+    ports:
+      - "9344:9344"
+  prometheus:
+    image: prom/prometheus
+    volumes:
+      - ./prometheus/config.yaml:/etc/prometheus/prometheus.yml
+      - ./prometheus/data:/prometheus
+    ports:
+      - "9090:9090"
+  grafana:
+    image: grafana/grafana-oss
+    volumes:
+      - ./grafana/data:/var/lib/grafana
+    ports:
+      - "3000:3000"

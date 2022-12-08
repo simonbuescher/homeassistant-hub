@@ -1,0 +1,34 @@
+mqtt:
+  host: "192.168.0.105"
+
+metrics:
+  - name: "shelly_temperature_celsius"
+    help: "Shelly H&T temperature"
+    type: "gauge"
+    topic: "shellies/+/sensor/temperature"
+    label_configs:
+      - source_labels: ["__msg_topic__"]
+        regex: ".*shellyht-([^/]+).*"
+        target_label: "location"
+        replacement: '\1'
+        action: "replace"
+  - name: "shelly_humidity_percent"
+    help: "Shelly H&T humidity"
+    type: "gauge"
+    topic: "shellies/+/sensor/humidity"
+    label_configs:
+      - source_labels: ["__msg_topic__"]
+        regex: ".*shellyht-([^/]+).*"
+        target_label: "location"
+        replacement: '\1'
+        action: "replace"
+  - name: "shelly_battery_percent"
+    help: "Shelly H&T battery"
+    type: "gauge"
+    topic: "shellies/+/sensor/battery"
+    label_configs:
+      - source_labels: ["__msg_topic__"]
+        regex: ".*shellyht-([^/]+).*"
+        target_label: "location"
+        replacement: '\1'
+        action: "replace"

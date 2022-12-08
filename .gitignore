@@ -1,0 +1,14 @@
+.idea
+shelly.iml
+
+grafana/data/*
+!grafana/data/.gitkeep
+
+mosquitto/data/*
+!mosquitto/data/.gitkeep
+
+mosquitto/log/*
+!mosquitto/log/.gitkeep
+
+prometheus/data/*
+!prometheus/data/.gitkeep
