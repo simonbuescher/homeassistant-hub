@@ -10,7 +10,7 @@ services:
     ports:
       - "1883:1883"
       - "9001:9001"
-    restart: always
+    restart: unless-stopped
 
   mqtt-exporter:
     image: fhemberger/mqtt_exporter
@@ -18,7 +18,7 @@ services:
       - ./mqtt-exporter/config.yaml:/usr/src/app/conf
     ports:
       - "9344:9344"
-    restart: always
+    restart: unless-stopped
 
   prometheus:
     image: prom/prometheus
@@ -27,7 +27,7 @@ services:
       - ./prometheus/data:/prometheus
     ports:
       - "9090:9090"
-    restart: always
+    restart: unless-stopped
 
   grafana:
     image: grafana/grafana-oss
@@ -35,4 +35,12 @@ services:
       - ./grafana/data:/var/lib/grafana
     ports:
       - "80:3000"
-    restart: always
+    restart: unless-stopped
+
+  home-assistant:
+    image: ghcr.io/home-assistant/home-assistant:stable
+    volumes:
+      - ./home-assistant/config:/config
+    ports:
+      - "8123:8123"
+    restart: unless-stopped

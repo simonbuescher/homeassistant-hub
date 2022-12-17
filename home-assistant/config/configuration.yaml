@@ -1,0 +1,112 @@
+
+# Loads default set of integrations. Do not remove.
+default_config:
+
+# Load frontend themes from the themes folder
+frontend:
+  themes: !include_dir_merge_named themes
+
+# Text to speech
+tts:
+  - platform: google_translate
+
+automation: !include automations.yaml
+script: !include scripts.yaml
+scene: !include scenes.yaml
+
+
+mqtt:
+  sensor:
+    # Wohnzimmer
+    - name: "ShellyHT Wohnzimmer Temperature"
+      unique_id: "shelly_ht_wohnzimmer_temperature"
+      unit_of_measurement: '°C'
+      device_class: temperature
+      icon: mdi:home-thermometer-outline
+      qos: 0
+      state_topic: "shellies/shellyht-wohnzimmer/sensor/temperature"
+      json_attributes_topic: "shellies/shellyht-wohnzimmer/announce"
+    - name: "ShellyHT Wohnzimmer Humidity"
+      unique_id: "shelly_ht_wohnzimmer_humidity"
+      unit_of_measurement: '%'
+      device_class: humidity
+      icon: mdi:water-percent
+      qos: 0
+      state_topic: "shellies/shellyht-wohnzimmer/sensor/humidity"
+    - name: "ShellyHT Wohnzimmer Battery"
+      unique_id: "shelly_ht_wohnzimmer_battery"
+      unit_of_measurement: '%'
+      device_class: battery
+      icon: mdi:battery
+      qos: 0
+      state_topic: "shellies/shellyht-wohnzimmer/sensor/battery"
+    # Schlafzimmer
+    - name: "ShellyHT Schlafzimmer Temperature"
+      unique_id: "shelly_ht_schlafzimmer_temperature"
+      unit_of_measurement: '°C'
+      device_class: temperature
+      icon: mdi:home-thermometer-outline
+      qos: 0
+      state_topic: "shellies/shellyht-schlafzimmer/sensor/temperature"
+      json_attributes_topic: "shellies/shellyht-schlafzimmer/announce"
+    - name: "ShellyHT Schlafzimmer Humidity"
+      unique_id: "shelly_ht_schlafzimmer_humidity"
+      unit_of_measurement: '%'
+      device_class: humidity
+      icon: mdi:water-percent
+      qos: 0
+      state_topic: "shellies/shellyht-schlafzimmer/sensor/humidity"
+    - name: "ShellyHT Schlafzimmer Battery"
+      unique_id: "shelly_ht_schlafzimmer_battery"
+      unit_of_measurement: '%'
+      device_class: battery
+      icon: mdi:battery
+      qos: 0
+      state_topic: "shellies/shellyht-schlafzimmer/sensor/battery"
+    # Büro
+    - name: "ShellyHT Büro Temperature"
+      unique_id: "shelly_ht_buero_temperature"
+      unit_of_measurement: '°C'
+      device_class: temperature
+      icon: mdi:home-thermometer-outline
+      qos: 0
+      state_topic: "shellies/shellyht-buero/sensor/temperature"
+      json_attributes_topic: "shellies/shellyht-buero/announce"
+    - name: "ShellyHT Büro Humidity"
+      unique_id: "shelly_ht_buero_humidity"
+      unit_of_measurement: '%'
+      device_class: humidity
+      icon: mdi:water-percent
+      qos: 0
+      state_topic: "shellies/shellyht-buero/sensor/humidity"
+    - name: "ShellyHT Büro Battery"
+      unique_id: "shelly_ht_buero_battery"
+      unit_of_measurement: '%'
+      device_class: battery
+      icon: mdi:battery
+      qos: 0
+      state_topic: "shellies/shellyht-buero/sensor/battery"
+    # Bad
+    - name: "ShellyHT Bad Temperature"
+      unique_id: "shelly_ht_bad_temperature"
+      unit_of_measurement: '°C'
+      device_class: temperature
+      icon: mdi:home-thermometer-outline
+      qos: 0
+      state_topic: "shellies/shellyht-bad/sensor/temperature"
+      json_attributes_topic: "shellies/shellyht-bad/announce"
+    - name: "ShellyHT Bad Humidity"
+      unique_id: "shelly_ht_bad_humidity"
+      unit_of_measurement: '%'
+      device_class: humidity
+      icon: mdi:water-percent
+      qos: 0
+      state_topic: "shellies/shellyht-bad/sensor/humidity"
+    - name: "ShellyHT Bad Battery"
+      unique_id: "shelly_ht_bad_battery"
+      unit_of_measurement: '%'
+      device_class: battery
+      icon: mdi:battery
+      qos: 0
+      state_topic: "shellies/shellyht-bad/sensor/battery"
+
