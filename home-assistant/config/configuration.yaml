@@ -13,7 +13,7 @@ tts:
 automation: !include automations.yaml
 script: !include scripts.yaml
 scene: !include scenes.yaml
-
+shell_command: !include shell_commands.yaml
 
 mqtt:
   sensor:

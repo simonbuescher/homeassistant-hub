@@ -1,1 +1,209 @@
-[]
+- id: '1671450270150'
+  alias: 'Temperatur-Warnung '
+  description: Warnt, wenn Temperatur über 15 Minuten lang unter 18 Grad ist.
+  trigger:
+  - platform: numeric_state
+    entity_id: sensor.shellyht_wohnzimmer_temperature
+    for:
+      hours: 0
+      minutes: 15
+      seconds: 0
+    below: 18
+  - platform: numeric_state
+    entity_id: sensor.shellyht_schlafzimmer_temperature
+    for:
+      hours: 0
+      minutes: 15
+      seconds: 0
+    below: 18
+    value_template: ''
+  - platform: numeric_state
+    entity_id: sensor.shellyht_buro_temperature
+    for:
+      hours: 0
+      minutes: 15
+      seconds: 0
+    below: 18
+  - platform: numeric_state
+    entity_id: sensor.shellyht_bad_temperature
+    for:
+      hours: 0
+      minutes: 15
+      seconds: 0
+    below: 18
+  condition: []
+  action:
+  - device_id: db2a5ebc0db285ec306db7e9e4e16b91
+    domain: mobile_app
+    type: notify
+    message: '{{ trigger.to_state.name }} unter 18 Grad.'
+    title: 'Temperatur-Warnung '
+  mode: single
+- id: '1671528328925'
+  alias: Luftfeuchtigkeit-Warnung
+  description: Warnt, wenn Luftfeuchtigkeit über 15 Minuten lang über 70% ist.
+  trigger:
+  - platform: numeric_state
+    entity_id: sensor.shellyht_wohnzimmer_humidity
+    for:
+      hours: 0
+      minutes: 15
+      seconds: 0
+    above: 70
+  - platform: numeric_state
+    entity_id: sensor.shellyht_schlafzimmer_humidity
+    for:
+      hours: 0
+      minutes: 15
+      seconds: 0
+    value_template: ''
+    above: 70
+  - platform: numeric_state
+    entity_id: sensor.shellyht_buro_humidity
+    for:
+      hours: 0
+      minutes: 15
+      seconds: 0
+    above: 70
+  - platform: numeric_state
+    entity_id: sensor.shellyht_bad_humidity
+    for:
+      hours: 0
+      minutes: 15
+      seconds: 0
+    above: 70
+  condition: []
+  action:
+  - device_id: db2a5ebc0db285ec306db7e9e4e16b91
+    domain: mobile_app
+    type: notify
+    message: '{{ trigger.to_state.name }} über 70%.'
+    title: 'Luftfeuchtigkeit-Warnung '
+  mode: single
+- id: '1671631190953'
+  alias: Temperatur-Warnung leicht
+  description: Warnt, wenn Temperatur über 1 Stunde lang unter 19 Grad ist.
+  trigger:
+  - platform: numeric_state
+    entity_id: sensor.shellyht_wohnzimmer_temperature
+    for:
+      hours: 1
+      minutes: 0
+      seconds: 0
+    below: 19
+  - platform: numeric_state
+    entity_id: sensor.shellyht_schlafzimmer_temperature
+    for:
+      hours: 1
+      minutes: 0
+      seconds: 0
+    below: 19
+    value_template: ''
+  - platform: numeric_state
+    entity_id: sensor.shellyht_buro_temperature
+    for:
+      hours: 1
+      minutes: 0
+      seconds: 0
+    below: 19
+  - platform: numeric_state
+    entity_id: sensor.shellyht_bad_temperature
+    for:
+      hours: 1
+      minutes: 0
+      seconds: 0
+    below: 19
+  condition: []
+  action:
+  - device_id: db2a5ebc0db285ec306db7e9e4e16b91
+    domain: mobile_app
+    type: notify
+    message: '{{ trigger.to_state.name }} seit über 1 Stunde unter 19 Grad.'
+    title: 'Temperatur-Warnung '
+  mode: single
+- id: '1671631286453'
+  alias: 'Luftfeuchtigkeit-Warnung leicht '
+  description: Warnt, wenn Luftfeuchtigkeit über 1 Stunde lang über 60% ist.
+  trigger:
+  - platform: numeric_state
+    entity_id: sensor.shellyht_wohnzimmer_humidity
+    for:
+      hours: 1
+      minutes: 0
+      seconds: 0
+    above: 60
+  - platform: numeric_state
+    entity_id: sensor.shellyht_schlafzimmer_humidity
+    for:
+      hours: 1
+      minutes: 0
+      seconds: 0
+    value_template: ''
+    above: 60
+  - platform: numeric_state
+    entity_id: sensor.shellyht_buro_humidity
+    for:
+      hours: 1
+      minutes: 0
+      seconds: 0
+    above: 60
+  - platform: numeric_state
+    entity_id: sensor.shellyht_bad_humidity
+    for:
+      hours: 1
+      minutes: 0
+      seconds: 0
+    above: 60
+  condition: []
+  action:
+  - device_id: db2a5ebc0db285ec306db7e9e4e16b91
+    domain: mobile_app
+    type: notify
+    message: '{{ trigger.to_state.name }} seit über 1 Stunde über 60%.'
+    title: 'Luftfeuchtigkeit-Warnung '
+  mode: single
+- id: '1672336835180'
+  alias: Turn Off Unraid
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - input_boolean.unraid_start_stop_switch
+    from: 'on'
+    to: 'off'
+  condition:
+  - condition: state
+    entity_id: switch.shellyplug_s_80646f83bb3e
+    state: 'on'
+  action:
+  - service: shell_command.turn_off_unraid
+    data: {}
+  - delay:
+      hours: 0
+      minutes: 1
+      seconds: 30
+      milliseconds: 0
+  - type: turn_off
+    device_id: 34e559c7912270f0d5fa09127101226d
+    entity_id: switch.shellyplug_s_80646f83bb3e
+    domain: switch
+  mode: single
+- id: '1672336891136'
+  alias: Turn On Unraid
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - input_boolean.unraid_start_stop_switch
+    from: 'off'
+    to: 'on'
+  condition:
+  - condition: state
+    entity_id: switch.shellyplug_s_80646f83bb3e
+    state: 'off'
+  action:
+  - type: turn_on
+    device_id: 34e559c7912270f0d5fa09127101226d
+    entity_id: switch.shellyplug_s_80646f83bb3e
+    domain: switch
+  mode: single

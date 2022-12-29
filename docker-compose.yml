@@ -41,6 +41,7 @@ services:
     image: ghcr.io/home-assistant/home-assistant:stable
     volumes:
       - ./home-assistant/config:/config
+      - /home/pi/.ssh/id_rsa_homeassistant:/config/id_rsa_homeassistant
     ports:
       - "8123:8123"
     restart: unless-stopped
